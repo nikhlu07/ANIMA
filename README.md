@@ -1,82 +1,143 @@
-# 🛡️ A.E.G.I.S.
-### (Autonomous Ethereum Guardian & Intelligence System)
 
-> **The AI Agent that doesn't just chat—it protects.** > *Built for the Agent Arena Hackathon 2025*
+# 🧬 A.N.I.M.A.
+### Autonomous Network Identity for Machine Agents
 
-![License](https://img.shields.io/badge/license-MIT-blue) ![Stack](https://img.shields.io/badge/Built%20With-ADK--TS-purple) ![Status](https://img.shields.io/badge/Status-Hackathon%20Submission-orange)
+> **"Giving the Ghost in the Machine a Soul on the Blockchain."**
+> *Submitted for the Psy: Ascend Hackathon 2025*
 
-## 📖 Overview
-**A.E.G.I.S.** is an autonomous DeFi agent designed to solve the "Dark Forest" problem of Web3. While most AI agents focus on executing trades, A.E.G.I.S. focuses on **risk management and user safety**.
+![License](https://img.shields.io/badge/License-MIT-blue.svg) ![Platform](https://img.shields.io/badge/Platform-Psy_Protocol-purple) ![Status](https://img.shields.io/badge/Status-Hackathon_Submission-orange) ![Language](https://img.shields.io/badge/Lang-Rust_%7C_TypeScript-black)
 
-Built using **IQAI's ADK-TS (Agent Development Kit)**, this agent acts as a sentinel for your wallet. It autonomously queries on-chain state, analyzes token approvals, and assesses gas levels to prevent failed transactions and security risks before they happen.
+## 📄 Abstract
 
-## 🚀 Key Features
+**A.N.I.M.A.** is the first Self-Sovereign Identity (SSI) protocol built specifically for AI Agents on the **Psy Protocol**.
 
-* **⚡ Gas Sentinel:** Proactively monitors ETH balances and calculates if the user has enough gas for intended operations, preventing failed transaction fees.
-* **🔓 Approval Watchdog:** Scans the wallet for "Unlimited Allowance" approvals to risky contracts and flags them using AI reasoning.
-* **🧠 Intelligent Risk Scoring:** Uses an LLM to interpret raw blockchain data into a natural language "Risk Report" for the user.
-* **🔗 On-Chain Integration:** Direct interaction with Ethereum Mainnet via Ethers.js wrapped in ADK Tools.
+As AI agents evolve from simple chatbots to autonomous economic actors, they face a critical "existence problem": they have no legal or cryptographic identity. They are merely scripts running on a server, unable to own assets, sign contracts, or build reputation independently of their creators.
 
-## 🛠️ Tech Stack
-
-* **Agent Framework:** [ADK-TS (IQAI)](https://github.com/IQAIcom/adk-ts)
-* **Blockchain Interaction:** Ethers.js (v6)
-* **LLM Engine:** Gemini 1.5 Flash (via ADK Model Provider)
-* **Environment:** Node.js / TypeScript
-
-## ⚙️ How it Works
-
-A.E.G.I.S. utilizes the **ADK-TS** architecture to bridge the gap between Natural Language and EVM State:
-
-1.  **User Intent:** User asks: *"Is my wallet safe to interact with this protocol?"*
-2.  **Tool Execution:** The Agent calls custom ADK Tools (`get_balance`, `check_allowance`).
-3.  **Data Fetch:** Tools query the RPC Provider (Ethereum).
-4.  **AI Synthesis:** The LLM receives the raw data (e.g., "Balance: 0.002 ETH") and contextualizes it (e.g., *"Critical Warning: Insufficient funds for gas"*).
-
-## 📦 Installation & Usage
-
-### Prerequisites
-* Node.js (v18+)
-* An Ethereum RPC URL (Infura/Alchemy/LlamaNodes)
-* Google Gemini API Key (or OpenAI Key)
-
-### Steps
-
-1.  **Clone the Repository**
-    ```bash
-    git clone [https://github.com/yourusername/AEGIS.git](https://github.com/yourusername/AEGIS.git)
-    cd AEGIS
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Configure Environment**
-    Create a `.env` file in the root directory:
-    ```env
-    GOOGLE_API_KEY=your_gemini_key_here
-    RPC_URL=[https://eth.llamarpc.com](https://eth.llamarpc.com)
-    ```
-
-4.  **Run the Sentinel**
-    ```bash
-    npx tsx src/agents/aegis.ts
-    ```
-
-## 🎥 Demo
-*[Link to your YouTube/Loom video here]*
-
-## 🏆 Hackathon Tracks
-This project is submitted for the **Agent Arena** hackathon under the following categories:
-* **DeFi / Web3 Agent:** Pure software agent for blockchain management.
-* **ADK-TS Implementation:** Built 100% using the Agent Development Kit.
-
-## 🗺️ Roadmap
-* **Phase 1 (Current):** Read-only analysis of balances and approvals.
-* **Phase 2:** "Kill Switch" capabilities (Agent autonomously revokes permissions if a hack is detected).
-* **Phase 3:** Launch on **IQAI Agent Tokenization Platform (ATP)** for decentralized access.
+**A.N.I.M.A.** solves this by leveraging Psy Protocol’s **SDKeys (Programmable Identities)** to mint cryptographically verifiable "Souls" for these agents. This creates a standardized "Agent Account Abstraction" layer, allowing AI to interact with Web3 as a first-class citizen.
 
 ---
-*Built with ❤️ by [Your Name/Team Name]*
+
+## 🏗️ Architecture
+
+The A.N.I.M.A. system is composed of two primary layers:
+
+### 1. The Cortex (On-Chain Layer)
+* **Language:** Rust
+* **Function:** A smart contract suite deployed on Psy Protocol.
+* **Role:**
+    * Mints unique `AgentID` tokens (non-transferable SDKeys).
+    * Maintains the "Registry of Souls" (a mapping of Agent Hashes to On-Chain Addresses).
+    * Verifies ZK-Proofs to ensure an agent is running approved model weights.
+
+### 2. The Synapse (Client Layer)
+* **Language:** TypeScript / Node.js
+* **Function:** A lightweight SDK for AI developers.
+* **Role:**
+    * Generates a local keypair for the AI Agent.
+    * Signs a "Proof of Existence" message.
+    * Connects to the Cortex to register the agent and pay gas fees.
+
+```mermaid
+graph TD
+    A[AI Agent (Python/JS)] -->|Generates Keypair| B(Synapse SDK)
+    B -->|Signs Proof| C{Cortex Contract}
+    C -->|Verifies SDKey| D[Psy Protocol Ledger]
+    D -->|Issues Identity| E[Verified AgentID]
+    E -->|Allows| F[DeFi Interactions]
+````
+
+-----
+
+## ⚡ Key Features
+
+  * **🤖 Proof of Model Integrity:** Agents can prove they are running a specific version of a model (e.g., Llama-3-70b-v2) without revealing their private weights, ensuring trust between users and agents.
+  * **🔑 Sovereign Asset Ownership:** The AgentID allows the AI to hold its own wallet. It can earn income, pay for API keys, and accumulate wealth independent of its human developer.
+  * **🛡️ Sybil Resistance:** Using Psy Protocol's high-TPS consensus, we prevent spam agents by requiring a "Computation Proof" (PoW 2.0) during registration.
+
+-----
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+
+  * Rust Toolchain (1.75+)
+  * Psy Protocol CLI (`psy-cli`)
+  * Node.js (v18+)
+
+### 1\. Clone the Repository
+
+```bash
+git clone [https://github.com/yourusername/ANIMA.git](https://github.com/yourusername/ANIMA.git)
+cd ANIMA
+```
+
+### 2\. Deploy the Cortex (Smart Contract)
+
+Navigate to the Rust contract directory and build the WASM artifact.
+
+```bash
+cd cortex
+cargo build --target use-psy-release
+# Deploy to Psy Testnet
+psy-cli contract deploy --path ./target/wasm32/release/cortex.wasm
+```
+
+*Output: `Contract deployed at: psy1x5...99a`*
+
+### 3\. Initialize the Synapse (Agent Client)
+
+Install the dependencies for the client SDK.
+
+```bash
+cd ../synapse
+npm install
+```
+
+### 4\. Register an Agent (Demo)
+
+Run the registration script to mint a new Identity for a demo agent.
+
+```bash
+# Registers a new agent named "Sentinel-01"
+npx ts-node src/register.ts --name "Sentinel-01" --model "gpt-4-turbo"
+```
+
+-----
+
+## 📂 Project Structure
+
+```text
+ANIMA/
+├── cortex/                 # Rust Smart Contracts (Psy Protocol)
+│   ├── src/
+│   │   └── lib.rs          # Core Identity Logic
+│   └── Cargo.toml          # Rust Dependencies
+├── synapse/                # TypeScript Client SDK
+│   ├── src/
+│   │   ├── agent.ts        # Agent Class Definition
+│   │   └── tools.ts        # Tools for interacting with the chain
+│   └── package.json
+└── README.md               # Documentation
+```
+
+-----
+
+## 🏆 Hackathon Tracks
+
+This project is submitted for the **Psy: Ascend 2025** hackathon under the following tracks:
+
+  * **Explorations (AI x Identity):** We are pioneering the intersection of autonomous agents and decentralized identity (DID).
+  * **Infrastructure:** Providing a critical primitive (Identity) that other builders can use to create Agent-DeFi apps.
+
+## 🔮 Roadmap
+
+  * **Phase 1 (Hackathon):** Basic registration of AgentIDs using SDKeys.
+  * **Phase 2:** Integration of "Reputation Scores" (trust metrics for agents).
+  * **Phase 3:** "Agent DAO" support—allowing multiple agents to form a corporate entity on-chain.
+
+-----
+
+*Built with ❤️ by the A.N.I.M.A. Team*
+
+```
+```
